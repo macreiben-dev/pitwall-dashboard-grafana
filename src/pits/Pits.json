@@ -15,19 +15,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "10.4.1"
+      "version": "12.0.2"
     },
     {
       "type": "datasource",
       "id": "prometheus",
       "name": "Prometheus",
       "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
     },
     {
       "type": "panel",
@@ -66,119 +60,6 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "pitwall_leaderboard_isinpitlane"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 140
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 169
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 11,
-        "w": 11,
-        "x": 0,
-        "y": 0
-      },
-      "id": 2,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true,
-        "sortBy": []
-      },
-      "pluginVersion": "10.4.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "sum by(Car) (pitwall_leaderboard_isinpitlane{SourceCar=\"$SelectedSourceCar\", SourcePilot=\"$SelectedSourcePilot\"}) == 1",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Current Pits",
-      "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {
-            "keepLabels": [
-              "Car"
-            ],
-            "mode": "columns"
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
             "mode": "palette-classic"
           },
           "custom": {
@@ -188,6 +69,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -218,8 +100,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -232,8 +113,8 @@
       },
       "gridPos": {
         "h": 11,
-        "w": 10,
-        "x": 11,
+        "w": 21,
+        "x": 0,
         "y": 0
       },
       "id": 3,
@@ -245,10 +126,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -287,6 +170,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -317,8 +201,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -344,10 +227,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
@@ -371,7 +256,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
@@ -382,10 +267,8 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(pitwall_leaderboard_isinpitlane,SourceCar)",
-        "hide": 0,
         "includeAll": false,
         "label": "SelectedSourceCar",
-        "multi": false,
         "name": "SelectedSourceCar",
         "options": [],
         "query": {
@@ -395,8 +278,6 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
@@ -406,10 +287,8 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(pitwall_leaderboard_isinpitlane,SourcePilot)",
-        "hide": 0,
         "includeAll": false,
         "label": "SelectedSourcePilot",
-        "multi": false,
         "name": "SelectedSourcePilot",
         "options": [],
         "query": {
@@ -419,8 +298,6 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
@@ -430,10 +307,8 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(pitwall_leaderboard_isinpitlane,Car)",
-        "hide": 0,
         "includeAll": false,
         "label": "FocusOnCar",
-        "multi": false,
         "name": "FocusOnCar",
         "options": [],
         "query": {
@@ -443,8 +318,6 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
@@ -457,6 +330,6 @@
   "timezone": "browser",
   "title": "Beta - Pits",
   "uid": "fdo228wz9flkwd",
-  "version": 22,
+  "version": 2,
   "weekStart": ""
 }
